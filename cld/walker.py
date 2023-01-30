@@ -5,19 +5,19 @@ import time
 
 sys.path.append(os.path.dirname(os.getcwd()))
 
-import torch
 from torch.utils.tensorboard import SummaryWriter
 from torch.distributions.one_hot_categorical import OneHotCategorical
-import torch.nn.functional as F
 
 from utils import *
 
 
 def classifier_from_x(classifier, edge, target):
     target = target
+
     def crit(x):
         p = (classifier(edge(x, False))).sigmoid()
         return (target * (p + 1e-7).log() + (1 - target) * (1 - p + 1e-7).log()).mean(-1)
+
     return crit
 
 
@@ -175,7 +175,7 @@ class Walker(object):
         bt = diff + angle_C
         idx = torch.where(norm_phi2 > 0)
         bt[idx] = (bt[idx] / norm_phi2[idx])
-        bt = bt.clip(-1000,1000)
+        bt = bt.clip(-1000, 1000)
         bt, gradient_C, constraint_gradient_phi = bt[None], gradient_C[None], constraint_gradient_phi[None]
         h = ht.repeat(self.n, 1).reshape(self.n, batch_size, -1)
         h = (h + self.gamma * (gradient_C - bt[:, :, None] * constraint_gradient_phi).clip(-10, 10)).view(batch_size *

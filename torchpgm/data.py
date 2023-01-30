@@ -2,12 +2,7 @@ import sys, os
 sys.path.append(os.path.dirname(os.getcwd()))
 
 import torch, torchvision
-from torch import nn, optim
 from torch.utils.data import DataLoader, Dataset
-
-from utils import *
-
-
 
 class RBMData(Dataset):
     def __init__(self, file, subset=None, nnz_idx=None, z_idx = None):

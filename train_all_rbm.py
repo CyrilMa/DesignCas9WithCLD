@@ -1,12 +1,12 @@
+import warnings
+warnings.filterwarnings("ignore")
+
 from random import shuffle
 
-import torch
-from torch import nn, optim
-from torch.utils.data import DataLoader, Dataset
+from torch import optim
 
-from .config import *
 from torchpgm import *
-
+from config import *
 
 device = "cuda"
 folder = f"{DATA}/vink"
@@ -20,7 +20,7 @@ l1b = 0.0025
 l2 = 0.05
 lambda_pa = 0.00
 lr = 0.0001
-
+gammas = sorted(gammas)[260:542]
 model_full_name = f"rbmssl_pid_h{Nh}_npam{Npam}"
 
 for gamma in gammas:
@@ -46,8 +46,6 @@ for gamma in gammas:
     g_pi = (g_pi - g_pi.mean(0)[None]).flatten() / W
 
     device = "cuda"
-    folder = f"{DATA}/cas9/vink"
-    model_full_name = f"rbmssl_pid_h{Nh}_npam{Npam}"
     visible_layers = ["pi"]
     hidden_layers = ["hidden"]
 
@@ -58,7 +56,7 @@ for gamma in gammas:
     E.sort()
 
     model_rbm = PI_RBM_SSL(classifier, layers={pi.name: pi, h.name: h}, edges=E, gamma=gamma,
-                           name=f"classifier_{model_full_name}")
+                           name=f"{model_full_name}_gamma{gamma}")
     optimizer = optim.AdamW(model_rbm.parameters(), lr=lr)
     model_rbm = model_rbm.to("cuda")
     model_rbm.ais()
@@ -67,7 +65,7 @@ for gamma in gammas:
         model_rbm.train_epoch_classifier(optimizer, train_loader, train_loader_labelled, train_dataset,
                                          train_dataset_labelled,
                                          regularizer={"l1b": l1b, "l2": l2, "l1b_pam": 0},
-                                         epoch=epoch, savepath=f"{folder}/weights/c{model_full_name}")
+                                         epoch=epoch, savepath=f"{folder}/weights/{model_full_name}_gamma{gamma}")
         shuffle(train_dataset_labelled.x_m)
         shuffle(train_dataset.x_m)
 

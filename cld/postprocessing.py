@@ -1,10 +1,8 @@
 import sys
 import os
-import torch
 import torch.nn.functional as F
 
 sys.path.append(os.path.dirname(os.getcwd()))
-from utils import *
 
 
 class AbstractPostprocessor(object):
