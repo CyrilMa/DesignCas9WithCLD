@@ -5,5 +5,4 @@ venv
 dataset
 .idea
 binding
-*.pt
 data/vink

@@ -224,7 +224,7 @@ class PAM_classifier(nn.Module):
         self.linear1 = nn.Linear(in_features, out_features)
 
     def forward(self, x):
-        return self.linear1(x)
+        return self.linear1(self.bn1(x))
 
     def l1b_reg(self):
         weights1 = self.linear1.weight.data
