@@ -1,0 +1,8 @@
+venv
+*.ipynb_checkpoints
+*.idea
+*__pycache__
+.idea
+*.pt
+data/vink
+.foldx

@@ -1,0 +1,22 @@
+# ml-design-pid.csv
+Description: here we detail the variants whose activity was tested, The sequence, computational scores and experimental validation are displayed 
+
+id: name of the variant tested
+batch: number of the batch, due to its complete failure and having been done through other methods, batch 1 was excluded from main
+seq: amino-acid sequences
+aligned_seq: amino-acid sequences with gaps to be aligned with PFAM16595 MSA
+dna_seq: DNA sequence synthetized for cloning into E, coli
+diff_spycas9: # mutation to SpyCas9
+best_diff: # mutation to closest natural variant collected
+e_rbm: RBM energy (negative PLL + log(Z))
+c_rbm: score of the classifier (for recognizing pam TGG) of the SSL-RBM
+fx_ddg: DDG calculed with FoldX to assess protein stability
+fx_interenergy: Interaction energy calculated with FoldX
+af2_tmscore: TM-score between AF2 model of wild-type and the one for the variant (calculated through M-score software)
+af2_rmsd: RMSD between AF2 model of wild-type and the one for the variant (calculated through M-score software)
+af2_plddt: pLDDT of the AF2 model
+af2_ptmscore: pTMscore of the AF2 model
+norm_repression: measured experimental activity (approximated to 0 for batch as the experiment was not conducted to term)
+norm_repression_std: standard deviation measured over the 3 experiments
+functional: level of functionality to use in tasks
+

@@ -1,0 +1,12 @@
+chimeras.csv
+Description: Here we show the chimeras tested in sec 2.1 (protein sequence, origin, experimental results)
+
+name: name of the natural Cas9 variant from which the PID was extracted
+seq: amino-acid sequence
+aligned_seq: amino-acid sequence with gaps to be aligned with PFAM16595 MSA
+type: subfamily of the PID variant (see Collias et al. 2021)
+pam: pam recognized according to Collias et al. 2021
+identity: similarity to SpyCas9-PID
+pam_tested: pam targeted to test the activity of the chimera
+norm_repression: measured experimental activity
+norm_repression_std: standard deviation measured over the 3 experiments
